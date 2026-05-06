@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3246125245133824445}
   - component: {fileID: 5280711885527076819}
   - component: {fileID: 841639973315637017}
-  - component: {fileID: 4117391384748179846}
+  - component: {fileID: 4215686893366646640}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4117391384748179846
+--- !u!114 &4215686893366646640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,11 +143,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1617574850126975786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21fde0aadef11941a15e369e0455bde, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a7d12bd3d53fd546bacdbeedc184a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandTarget: {fileID: 0}
-  BoxR: {fileID: 841639973315637017}
-  BoxC: {fileID: 5280711885527076819}
-  BoxT: {fileID: 3441355299634394407}
-  ItPickUp: 0
+  holdArea: {fileID: 0}
+  pickupRange: 3

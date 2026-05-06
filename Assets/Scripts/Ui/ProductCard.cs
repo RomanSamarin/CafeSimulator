@@ -27,9 +27,15 @@ public class ProductCard : MonoBehaviour
 
     public void OnButtonClick()
     {
-       // Debug.Log("ProductCard::OnButtonClick(); -- _productSO:" + _productSO);
-       // ProductsManager.Instance?.SpawnObjectProduct(_productSO);
-       NumberOfProducts +=1;
-        productsOrder.Add(_productSO.gameObjectPrefab);
+        // Debug.Log("ProductCard::OnButtonClick(); -- _productSO:" + _productSO);
+        // ProductsManager.Instance?.SpawnObjectProduct(_productSO);
+        //NumberOfProducts +=1;
+        //  productsOrder.Add(_productSO.gameObjectPrefab);
+        if (_productSO != null)
+    {
+        // Просто обращаемся к корзине и передаем данные
+        BasketManager.Instance.AddProduct(_productSO);
+            Debug.Log("Был добавлен в корзину");
+    }
     }
 }

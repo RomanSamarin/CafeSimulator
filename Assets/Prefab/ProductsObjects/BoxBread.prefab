@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 636469203837189599}
   - component: {fileID: 650500051215185007}
   - component: {fileID: 4536102367318222101}
+  - component: {fileID: -5459264938252684977}
   m_Layer: 0
   m_Name: BoxBread
   m_TagString: Untagged
@@ -146,3 +147,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21fde0aadef11941a15e369e0455bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5459264938252684977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7369898969424518096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7d12bd3d53fd546bacdbeedc184a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "\u041A\u043E\u0440\u043E\u0431\u043A\u0430"
