@@ -11,7 +11,7 @@ public class OpenDoor : MonoBehaviour, IInteractable
     {
         Debug.Log("OpenDoor::GetDescription(); -- animator.GetBool(Open):" + animator.GetBool("Open"));
        if (animator.GetBool("Open") == false) return "Нажмите E";
-       return "132";
+       return "Нажмиите E чтобы закрыть";
     }
 
     public void Interact()

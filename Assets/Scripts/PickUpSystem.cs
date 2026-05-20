@@ -3,11 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PickupItem : MonoBehaviour, IInteractable
 {
-    public string itemName = "Коробка";
+    public string itemName = "Предмет";
     
+    [HideInInspector] public bool isHeld = false; 
+
     private Rigidbody rb;
     private Collider itemCollider;
-    private bool isHeld = false;
+    
+    // Переменная для сохранения исходного наклона по X
+    private float initialRotationX;
 
     void Start()
     {
@@ -31,6 +35,9 @@ public class PickupItem : MonoBehaviour, IInteractable
         isHeld = true;
         PlayerInteractor.Instance.heldObject = this.gameObject;
         
+        // ЗАПОМИНАЕМ ИСХОДНЫЙ НАКЛОН: Сохраняем текущий угол X перед тем, как взять в руки
+        initialRotationX = transform.eulerAngles.x;
+
         rb.useGravity = false;
         rb.isKinematic = true; 
         
@@ -39,11 +46,18 @@ public class PickupItem : MonoBehaviour, IInteractable
 
     public void Drop()
     {
-        isHeld = false;
-        PlayerInteractor.Instance.heldObject = null;
+        isHeld = false; 
+        transform.SetParent(null); 
+
+        if (PlayerInteractor.Instance.heldObject == this.gameObject)
+        {
+            PlayerInteractor.Instance.heldObject = null;
+        }
         
-        rb.useGravity = true;
         rb.isKinematic = false;
+        rb.useGravity = true;
+        
+        rb.AddForce(Camera.main.transform.forward * 2f, ForceMode.Impulse);
         
         if (itemCollider != null) itemCollider.enabled = true; 
     }
@@ -57,12 +71,16 @@ public class PickupItem : MonoBehaviour, IInteractable
             // 1. Плавно перемещаем в точку перед камерой
             transform.position = Vector3.Lerp(transform.position, targetPosition.position, Time.deltaTime * 15f);
             
-            // 2. ИСПРАВЛЕНИЕ НАКЛОНА:
-            // Берем только поворот игрока влево-вправо (ось Y). Наклоны (X и Z) жестко ставим в 0!
-            Quaternion flatRotation = Quaternion.Euler(0f, targetPosition.eulerAngles.y, 0f);
+            // 2. КОМБИНИРОВАННЫЙ ПОВОРОТ:
+            // Берем сохраненный X, Y берем от направления игрока, Z выставляем от точки holdArea
+            Quaternion targetRotation = Quaternion.Euler(
+                initialRotationX, 
+                targetPosition.eulerAngles.y, 
+                targetPosition.eulerAngles.z
+            );
             
-            // Плавно выравниваем коробку
-            transform.rotation = Quaternion.Lerp(transform.rotation, flatRotation, Time.deltaTime * 15f);
+            // Плавно разворачиваем предмет
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
         }
     }
 }
